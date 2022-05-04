@@ -1,0 +1,18 @@
+{
+  "properties": [
+    {
+      "name": "order.topic.name",
+      "type": "java.lang.String",
+      "description": "Description for order.topic.name."
+    },
+    {
+      "name": "kafka.bootstrap.address",
+      "type": "java.lang.String",
+      "description": "Description for kafka.bootstrap.address."
+    },
+    {
+      "name": "kafka.consumer.group-id",
+      "type": "java.lang.String",
+      "description": "Description for kafka.consumer.group-id."
+    }
+  ] }
