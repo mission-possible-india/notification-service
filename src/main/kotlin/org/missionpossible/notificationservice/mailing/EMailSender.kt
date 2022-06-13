@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component
 import javax.mail.internet.MimeMessage
 
 @Component
-class MailSender(@Autowired val sender: JavaMailSender) {
+class EMailSender(@Autowired val sender: JavaMailSender) {
 
     private val logger: Logger = LoggerFactory.getLogger(this::class.java)
 

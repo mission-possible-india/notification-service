@@ -6,9 +6,9 @@ import org.springframework.core.io.InputStreamSource
 import org.thymeleaf.TemplateEngine
 import org.thymeleaf.context.Context
 
-abstract class Mail(@Autowired val templateEngine: TemplateEngine) {
+abstract class Mail(private val templateEngine: TemplateEngine) {
 
-    private fun prepareMail(order: Order): MailingDetails {
+    fun prepareMail(order: Order): MailingDetails {
         val context = prepareContext(order)
         val mailBody = templateEngine.process(getTemplateLocation(), context)
 

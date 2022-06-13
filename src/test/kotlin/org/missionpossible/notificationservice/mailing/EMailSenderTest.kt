@@ -13,10 +13,10 @@ import javax.mail.Message.RecipientType.TO
 import javax.mail.Session
 import javax.mail.internet.MimeMessage
 
-class MailSenderTest {
+class EMailSenderTest {
 
     private val javaMailSender = mockk<JavaMailSender>()
-    private val mailSender = MailSender(javaMailSender)
+    private val EMailSender = EMailSender(javaMailSender)
     private val mimeMessageSlot = slot<MimeMessage>()
 
     @BeforeEach
@@ -37,7 +37,7 @@ class MailSenderTest {
             attachment = Pair("poster.jpg", FileSystemResource("src/test/resources/attachment.jpg"))
         )
 
-        mailSender.sendMail(mailingDetails)
+        EMailSender.sendMail(mailingDetails)
 
         verify(exactly = 1) { javaMailSender.send(any<MimeMessage>()) }
         mimeMessageSlot.captured.subject shouldBe "Greetings from Mission Possible"
@@ -59,7 +59,7 @@ class MailSenderTest {
             body = "Thank you for your contribution"
         )
 
-        mailSender.sendMail(mailingDetails)
+        EMailSender.sendMail(mailingDetails)
 
         verify(exactly = 1) { javaMailSender.send(any<MimeMessage>()) }
         MimeMessageParser(mimeMessageSlot.captured).parse().attachmentList.size shouldBe 0
@@ -73,7 +73,7 @@ class MailSenderTest {
             body = "Thank you for your contribution"
         )
 
-        mailSender.sendMail(mailingDetails)
+        EMailSender.sendMail(mailingDetails)
 
         verify(exactly = 1) { javaMailSender.send(any<MimeMessage>()) }
         MimeMessageParser(mimeMessageSlot.captured).parse().attachmentList.size shouldBe 1

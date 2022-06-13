@@ -1,17 +1,27 @@
 package org.missionpossible.notificationservice.consumers
 
-import org.missionpossible.notificationservice.mailing.MailingDetails
-import org.missionpossible.notificationservice.mailing.MailSender
+import org.missionpossible.notificationservice.mailing.DonationMail
+import org.missionpossible.notificationservice.mailing.EMailSender
+import org.missionpossible.notificationservice.mailing.ParticipationMail
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.stereotype.Component
 
 @Component
-class OrderConsumer(@Autowired val mailSender: MailSender) {
+class OrderConsumer(
+    @Autowired private val eMailSender: EMailSender,
+    @Autowired private val participationMail: ParticipationMail,
+    @Autowired private val donationMail: DonationMail
+) {
 
-    @KafkaListener(topics = ["#{'\${order.topic.name}'.split(',')}"], containerFactory = "orderKafkaListenerContainerFactory")
-    fun consume(order: Order?) {
-        val mailingDetails = MailingDetails(subject = "Greetings", to= "abc@xyz.com", body = "Hello! how are you")
-        mailSender.sendMail(mailingDetails)
+    @KafkaListener(topics = ["#{'\${order.topic.name}'.split(',')}"], containerFactory = "orderContainerFactory")
+    fun consume(order: Order) {
+        println("Order recieved as [$order]")
+        val mail = when (order.isDonation()) {
+            true -> donationMail.prepareMail(order)
+            else -> participationMail.prepareMail(order)
+        }
+
+        eMailSender.sendMail(mail)
     }
 }
