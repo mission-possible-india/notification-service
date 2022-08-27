@@ -1,4 +1,4 @@
-package org.missionpossible.notificationservice.consumers
+package org.missionpossible.notificationservice.integrationtests
 
 import com.icegreen.greenmail.util.GreenMail
 import com.icegreen.greenmail.util.GreenMailUtil
@@ -13,6 +13,7 @@ import org.awaitility.Durations
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.missionpossible.notificationservice.consumers.Order
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest

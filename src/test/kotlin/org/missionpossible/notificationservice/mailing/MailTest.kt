@@ -29,6 +29,57 @@ class MailTest {
         preparedMail.attachment?.first shouldBe "test-attachment"
         preparedMail.attachment?.second is ClassPathResource
     }
+
+    @Test
+    fun `should prepare mail with to`() {
+        val order = Order(emailId = "def@xyz.com", name = "Test", regId = "1001", amount = 100.0)
+        val mail = MailStub(mockTemplateEngine)
+
+        val preparedMail = mail.prepareMail(order)
+
+        preparedMail.to shouldBe "def@xyz.com"
+    }
+
+    @Test
+    fun `should prepare mail with cc`() {
+        val order = Order(emailId = "def@xyz.com", name = "Test", regId = "1001", amount = 100.0)
+        val mail = MailStub(mockTemplateEngine)
+
+        val preparedMail = mail.prepareMail(order)
+
+        preparedMail.cc shouldBe "abc@xyz.com"
+    }
+
+    @Test
+    fun `should prepare mail with subject`() {
+        val order = Order(emailId = "def@xyz.com", name = "Test", regId = "1001", amount = 100.0)
+        val mail = MailStub(mockTemplateEngine)
+
+        val preparedMail = mail.prepareMail(order)
+
+        preparedMail.subject shouldBe "Test Mail Stub!"
+    }
+
+    @Test
+    fun `should prepare mail with body`() {
+        val order = Order(emailId = "def@xyz.com", name = "Test", regId = "1001", amount = 100.0)
+        val mail = MailStub(mockTemplateEngine)
+
+        val preparedMail = mail.prepareMail(order)
+
+        preparedMail.body shouldBe "This is a test mail"
+    }
+
+    @Test
+    fun `should prepare mail with attachment`() {
+        val order = Order(emailId = "def@xyz.com", name = "Test", regId = "1001", amount = 100.0)
+        val mail = MailStub(mockTemplateEngine)
+
+        val preparedMail = mail.prepareMail(order)
+
+        preparedMail.attachment?.first shouldBe "test-attachment"
+        preparedMail.attachment?.second is ClassPathResource
+    }
 }
 
 class MailStub(templateEngine: TemplateEngine) : Mail(templateEngine) {

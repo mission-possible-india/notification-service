@@ -1,7 +1,6 @@
 package org.missionpossible.notificationservice.mailing
 
 import org.missionpossible.notificationservice.consumers.Order
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.io.InputStreamSource
 import org.thymeleaf.TemplateEngine
 import org.thymeleaf.context.Context
