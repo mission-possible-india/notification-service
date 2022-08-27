@@ -24,11 +24,10 @@ import org.springframework.test.annotation.DirtiesContext
 import org.springframework.test.context.ActiveProfiles
 import javax.mail.internet.MimeMultipart
 
-
 @ActiveProfiles(value = ["test"])
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext
-@EmbeddedKafka(partitions = 1, brokerProperties = ["listeners=PLAINTEXT://localhost:9092", "port=9092"], topics = ["order-topic"])
+@EmbeddedKafka(partitions = 1, brokerProperties = ["listeners=PLAINTEXT://localhost:9092", "port=9092"])
 class OrderConsumerIntegrationTest(
     @Autowired private val embeddedKafkaBroker: EmbeddedKafkaBroker,
     @Value(value = "\${order.topic.name}") val topic: String,

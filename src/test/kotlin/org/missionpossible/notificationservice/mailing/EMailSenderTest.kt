@@ -76,9 +76,7 @@ class EMailSenderTest {
         EMailSender.sendMail(mailingDetails)
 
         verify(exactly = 1) { javaMailSender.send(any<MimeMessage>()) }
-        MimeMessageParser(mimeMessageSlot.captured).parse().attachmentList.size shouldBe 1
-        mimeMessageSlot.captured.getRecipients(CC).size shouldBe 0
-        mimeMessageSlot.captured.getRecipients(CC)[0].toStr() shouldBe null
+        mimeMessageSlot.captured.getRecipients(CC) shouldBe null
     }
 
 }

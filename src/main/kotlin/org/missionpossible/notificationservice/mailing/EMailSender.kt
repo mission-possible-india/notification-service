@@ -1,6 +1,5 @@
 package org.missionpossible.notificationservice.mailing
 
-import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.mail.javamail.JavaMailSender
@@ -11,7 +10,7 @@ import javax.mail.internet.MimeMessage
 @Component
 class EMailSender(@Autowired val sender: JavaMailSender) {
 
-    private val logger: Logger = LoggerFactory.getLogger(this::class.java)
+    private val logger = LoggerFactory.getLogger(EMailSender::class.java)
 
     fun sendMail(mailingDetails: MailingDetails) {
         val mimeMessage: MimeMessage = sender.createMimeMessage()

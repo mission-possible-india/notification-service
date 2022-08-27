@@ -55,6 +55,6 @@ class ParticipationMailTest {
     fun `should return attachment for participation`() {
         val participationMail = ParticipationMail(templateEngine = templateEngine, ccAddress = "abc@xyz.com")
 
-        participationMail.getAttachment()?.first shouldBe "poster.jpg"
+        participationMail.getAttachment().first shouldBe "poster.jpg"
     }
 }
